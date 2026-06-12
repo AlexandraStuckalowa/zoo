@@ -1,0 +1,186 @@
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #eef7e6;
+    color: #24301f;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px 0 50px 0;
+}
+
+.header {
+    background: linear-gradient(135deg, #1f4d2b, #6b8e23);
+    color: white;
+    padding: 55px 0;
+    margin-bottom: 35px;
+    border-bottom: 8px solid #d9a441;
+}
+
+.header h1 {
+    margin: 0 0 12px 0;
+    font-size: 42px;
+}
+
+.header h1::before {
+    content: "🦁 ";
+}
+
+.header p {
+    margin: 0;
+    font-size: 18px;
+    max-width: 850px;
+}
+
+.card {
+    background: #fffdf4;
+    border-radius: 24px;
+    padding: 28px;
+    margin-bottom: 28px;
+    border: 2px solid #c9d8a8;
+    box-shadow: 0 10px 24px rgba(58, 80, 42, 0.15);
+}
+
+.card h2 {
+    margin-top: 0;
+    color: #2f5d35;
+    font-size: 26px;
+}
+
+.card h2::before {
+    content: "🌿 ";
+}
+
+.card h3 {
+    color: #5f7f1f;
+}
+
+.info-text {
+    line-height: 1.7;
+    font-size: 16px;
+}
+
+.upload-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    align-items: center;
+}
+
+.upload-form input[type="file"] {
+    padding: 12px;
+    background: #f7fbe9;
+    border: 2px dashed #7fa650;
+    border-radius: 16px;
+}
+
+.upload-form button,
+.card button {
+    background: linear-gradient(135deg, #5f7f1f, #8a9a3f);
+    color: white;
+    border: none;
+    padding: 13px 22px;
+    border-radius: 16px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 700;
+    box-shadow: 0 6px 14px rgba(95, 127, 31, 0.25);
+}
+
+.upload-form button:hover,
+.card button:hover {
+    background: linear-gradient(135deg, #3f6212, #5f7f1f);
+    transform: translateY(-1px);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 16px;
+}
+
+.stat-box {
+    background: #f1f8dc;
+    border-radius: 20px;
+    padding: 20px;
+    border: 2px solid #c4d99b;
+}
+
+.stat-box .label {
+    font-size: 14px;
+    color: #536340;
+    margin-bottom: 8px;
+}
+
+.stat-box .value {
+    font-size: 28px;
+    font-weight: 800;
+    color: #365314;
+}
+
+.chart-box {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #f7fbe9;
+    border-radius: 20px;
+    border: 2px solid #d9e8ba;
+}
+
+.chart-box img {
+    width: 100%;
+    max-width: 900px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 16px;
+    background: white;
+    box-shadow: 0 6px 16px rgba(73, 94, 54, 0.12);
+}
+
+.badge {
+    display: inline-block;
+    background: #dff3c4;
+    color: #315c21;
+    padding: 9px 15px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 14px;
+    border: 1px solid #aac97d;
+}
+
+.result-box {
+    background: #e4f6cc;
+    border: 2px solid #aac97d;
+    color: #315c21;
+    padding: 18px;
+    border-radius: 18px;
+    font-size: 19px;
+    font-weight: bold;
+    margin-top: 12px;
+}
+
+.result-box::before {
+    content: "🐾 ";
+}
+
+.error-box {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #b91c1c;
+    padding: 14px;
+    border-radius: 14px;
+    margin-top: 15px;
+}
+
+@media (max-width: 700px) {
+    .header h1 {
+        font-size: 30px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+}

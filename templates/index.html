@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Анализ посещаемости зоопарка</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦁</text></svg>">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=4">
+</head>
+<body>
+
+    <div class="header">
+        <div class="container">
+            <h1>Анализ посещаемости зоопарка</h1>
+            <p>Веб-приложение для анализа данных, визуализации и предсказания высокой посещаемости</p>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="card">
+            <h2>О проекте</h2>
+            <p class="info-text">
+                Это веб-приложение анализирует данные о посещениях зоопарка.
+                Пользователь загружает CSV-файл, после чего приложение рассчитывает
+                основные показатели, строит графики и обучает модель машинного обучения.
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>Загрузка данных</h2>
+
+            <form method="POST" action="/" enctype="multipart/form-data" class="upload-form">
+                <input type="file" name="file" accept=".csv">
+                <button type="submit">Проанализировать</button>
+            </form>
+
+            {% if error %}
+                <div class="error-box">
+                    {{ error }}
+                </div>
+            {% endif %}
+
+            {% if data_loaded %}
+                <div class="badge">
+                    Загруженный файл: {{ filename }}
+                </div>
+            {% endif %}
+        </div>
+
+        {% if data_loaded %}
+
+            <div class="card">
+                <form method="POST" action="/reset">
+                    <button type="submit">Очистить результат и загрузить другой файл</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h2>Основная информация о датасете</h2>
+
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="label">Количество строк</div>
+                        <div class="value">{{ rows_count }}</div>
+                    </div>
+
+                    <div class="stat-box">
+                        <div class="label">Количество столбцов</div>
+                        <div class="value">{{ columns_count }}</div>
+                    </div>
+
+                    <div class="stat-box">
+                        <div class="label">Среднее количество посетителей</div>
+                        <div class="value">{{ average_visitors }}</div>
+                    </div>
+
+                    <div class="stat-box">
+                        <div class="label">Максимальное количество посетителей</div>
+                        <div class="value">{{ max_visitors }}</div>
+                    </div>
+
+                    <div class="stat-box">
+                        <div class="label">Дни с высокой посещаемостью</div>
+                        <div class="value">{{ high_days }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Графики</h2>
+
+                <div class="chart-box">
+                    <h3>Количество дней по типу погоды</h3>
+                    <img src="{{ url_for('static', filename='charts/weather_chart.png') }}?v={{ filename }}">
+                </div>
+
+                <div class="chart-box">
+                    <h3>Среднее количество посетителей по дням недели</h3>
+                    <img src="{{ url_for('static', filename='charts/weekday_chart.png') }}?v={{ filename }}">
+                </div>
+
+                <div class="chart-box">
+                    <h3>Распределение обычной и высокой посещаемости</h3>
+                    <img src="{{ url_for('static', filename='charts/high_attendance_chart.png') }}?v={{ filename }}">
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Обучение модели</h2>
+
+                <p class="info-text">
+                    Для обучения модели используются признаки:
+                    день недели, погода, температура, выходной день,
+                    цена билета и наличие мероприятия в зоопарке.
+                </p>
+
+                <p class="info-text">
+                    Целевой признак: высокая посещаемость.
+                </p>
+
+                <p class="info-text">
+                    День считается днем с высокой посещаемостью, если количество посетителей больше 2500.
+                    Если посетителей 2500 или меньше, посещаемость считается обычной.
+                </p>
+
+                <div class="stat-box">
+                    <div class="label">Точность модели</div>
+                    <div class="value">{{ accuracy }}</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Пример предсказания</h2>
+
+                <p class="info-text">
+                    Для примера взят день со следующими условиями:
+                    суббота, солнечная погода, температура 24 градуса,
+                    выходной день, цена билета 700 рублей, есть мероприятие.
+                </p>
+
+                <div class="result-box">
+                    Предсказание модели: {{ example_result }}
+                </div>
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
